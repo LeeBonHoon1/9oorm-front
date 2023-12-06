@@ -15,7 +15,7 @@ import { useToast } from "@/components/ui/use-toast";
 
 const Selectpage = () => {
   const { toast } = useToast();
-  const { addResult, promptData, result } = usePrompt();
+  const { addResult, promptData } = usePrompt();
   const { lang } = promptData || {};
   const [visible, setVisible] = useState(false);
   const [start, setStart] = useState(false);
@@ -35,7 +35,7 @@ const Selectpage = () => {
       lang,
       keyword: input,
     };
-    await APIs.test(param)
+    await APIs.getPromptResult(param)
       .then((res) => {
         addResult(res);
         router.push("/temp");

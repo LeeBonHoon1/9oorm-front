@@ -4,16 +4,13 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
-import History from "@/components/ui/history";
-import { places } from "@/mok";
 import usePrompt from "@/store/prompt";
 import { useEffect, useState } from "react";
 
 const TempPage = () => {
   const [mounted, setMounted] = useState(false);
-  const { promptData, result } = usePrompt();
-  const { text } = result?.[0] ?? [];
-  const { lang } = promptData || {};
+  const { result } = usePrompt();
+  const { text, uri } = result?.[0] ?? [];
   const router = useRouter();
   const images = [
     {
@@ -43,8 +40,16 @@ const TempPage = () => {
   return (
     <div className="flex flex-col pt-9">
       <div className="">
-        <div className="flex gap-3 px-6 py-4 carousel rounded-box">
-          {images.map((item: any, index: number) => (
+        <div className="flex items-center justify-center gap-3 px-2 py-4 ">
+          <Image
+            src={uri}
+            objectFit="cover"
+            alt={`image`}
+            className="rounded-2xl carousel"
+            width={300}
+            height={300}
+          />
+          {/* {images.map((item: any, index: number) => (
             <div
               className={cn(
                 "relative flex px-2 carousel-item w-[300px] h-[300px] overflow-hidden space-x-3",
@@ -62,13 +67,15 @@ const TempPage = () => {
                 height={300}
               />
             </div>
-          ))}
+          ))} */}
         </div>
         {text &&
           text.map((item: string, index: number) => {
             return (
               <div key={index} className="px-5 py-5">
-                {item}
+                {item.split("<br />").map((line, index) => (
+                  <div key={index}>{line}</div>
+                ))}
               </div>
             );
           })}

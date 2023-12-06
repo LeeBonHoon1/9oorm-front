@@ -7,20 +7,24 @@ export const getImages = async (prompt: string) => {
   return res.data
 }
 
-export const test = async (param: any) => {
+export const getPromptResult = async (param: any) => {
   const { keyword } = param || {}
   if (keyword.length > 5) {
     const res = await axios.post(`${baseUrl}/create`, param)
-    return res.data
+    const text = res.data.text.map((item: string) => {
+      return item.replaceAll('\n', '<br />')
+    })
+
+    return { ...res.data, text: text }
   } else {
-    const newParam = { ...param, keyword: 'test' }
+    const newParam = { ...param, keyword: '**#@#*($&' }
     const res = await axios.post(`${baseUrl}/create`, newParam)
     return res.data
   }
 }
 const APIs = {
   getImages,
-  test
+  getPromptResult
 }
 
 export default APIs
