@@ -72,7 +72,7 @@ const TempPage = () => {
         {text &&
           text.map((item: string, index: number) => {
             return (
-              <div key={index} className="px-5 py-5">
+              <div key={index} className="px-10 py-5">
                 {item.split("<br />").map((line, index) => (
                   <div key={index}>{line}</div>
                 ))}
