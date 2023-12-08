@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import usePrompt from "@/store/prompt";
@@ -12,24 +11,6 @@ const TempPage = () => {
   const { result } = usePrompt();
   const { text, uri } = result?.[0] ?? [];
   const router = useRouter();
-  const images = [
-    {
-      id: 1,
-      url: "coastline1.png",
-    },
-    {
-      id: 2,
-      url: "coastline2.png",
-    },
-    {
-      id: 3,
-      url: "coastline3.png",
-    },
-    {
-      id: 4,
-      url: "coastline4.png",
-    },
-  ];
 
   useEffect(() => {
     setMounted(true);
@@ -49,32 +30,13 @@ const TempPage = () => {
             width={300}
             height={300}
           />
-          {/* {images.map((item: any, index: number) => (
-            <div
-              className={cn(
-                "relative flex px-2 carousel-item w-[300px] h-[300px] overflow-hidden space-x-3",
-                item.id == 1 ? "pl-6" : ""
-              )}
-              key={index}
-            >
-              <Image
-                key={item.id}
-                src={`/${item.url}`}
-                objectFit="cover"
-                alt={`${item.url} image`}
-                className="rounded-2xl carousel"
-                width={300}
-                height={300}
-              />
-            </div>
-          ))} */}
         </div>
         {text &&
           text.map((item: string, index: number) => {
             return (
               <div key={index} className="px-10 py-5">
                 {item.split("<br />").map((line, index) => (
-                  <div key={index}>{line}</div>
+                  <div key={index}>{line.replaceAll(`"`, "")}</div>
                 ))}
               </div>
             );

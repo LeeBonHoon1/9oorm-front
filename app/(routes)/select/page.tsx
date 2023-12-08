@@ -39,10 +39,12 @@ const Selectpage = () => {
       .then((res) => {
         addResult(res);
         router.push("/temp");
-        setStart(true);
+        setLoading(false);
+        setStart(false);
       })
       .catch((err) => {
-        setStart(true);
+        setLoading(false);
+        setStart(false);
         toast({
           title: "입력하신 장소를 찾지 못했어요.",
           description: "정확한 장소명을 입력해주세요!",
