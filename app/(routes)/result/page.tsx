@@ -45,7 +45,7 @@ const ResultPage = () => {
                   src={`/${item.href}`}
                   objectFit="cover"
                   alt={`${item.value} image`}
-                  className="rounded-2xl carousel"
+                  className="rounded-2xl carousel-item"
                   width={300}
                   height={300}
                 />
