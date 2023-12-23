@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import { Directions, places, Place } from "@/mok/index";
+import { places, Place } from "@/mok/index";
 import History from "@/components/ui/history";
 import usePrompt from "@/store/prompt";
 import { useDirectionStore } from "@/store/direction";
@@ -30,20 +30,26 @@ const ResultPage = () => {
 
   return (
     <div className="flex flex-col pt-9">
-      <div className="">
+      <div className="w-full">
         <div className="flex gap-3 px-6 py-4 carousel rounded-box">
           {places[langauge][direction].map((item) => (
-            <Image
-              key={item.id}
-              src={`/${item.href}`}
-              alt={`${item.value} image`}
-              className={cn(
-                `rounded-2xl carousel-item`,
-                item.id === 1 ? "" : ""
-              )}
-              width={300}
-              height={300}
-            />
+            <>
+              <div
+                className={cn(
+                  "relative flex px-2 carousel-item w-[300px] h-[200px] overflow-hidden space-x-3",
+                  item.id == 1 ? "" : ""
+                )}
+              >
+                <Image
+                  key={item.id}
+                  src={`/${item.href}`}
+                  objectFit="cover"
+                  alt={`${item.value} image`}
+                  className="rounded-2xl carousel-item absolute"
+                  fill
+                />
+              </div>
+            </>
           ))}
         </div>
         <div className="bg-transparent pt-10">
