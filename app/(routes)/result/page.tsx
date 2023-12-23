@@ -33,24 +33,17 @@ const ResultPage = () => {
       <div className="">
         <div className="flex gap-3 px-6 py-4 carousel rounded-box">
           {places[langauge][direction].map((item) => (
-            <>
-              <div
-                className={cn(
-                  "relative flex px-2 carousel-item w-[300px] h-[300px] overflow-hidden space-x-3",
-                  item.id == 1 ? "pl-6" : ""
-                )}
-              >
-                <Image
-                  key={item.id}
-                  src={`/${item.href}`}
-                  objectFit="cover"
-                  alt={`${item.value} image`}
-                  className="rounded-2xl carousel-item"
-                  width={300}
-                  height={300}
-                />
-              </div>
-            </>
+            <Image
+              key={item.id}
+              src={`/${item.href}`}
+              alt={`${item.value} image`}
+              className={cn(
+                `rounded-2xl carousel-item`,
+                item.id === 1 ? "" : ""
+              )}
+              width={300}
+              height={300}
+            />
           ))}
         </div>
         <div className="bg-transparent pt-10">
